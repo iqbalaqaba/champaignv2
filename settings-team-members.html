@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Settings - View Members</title>
+
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        content: ["./src/**/*.{html,js,jsx,ts,tsx,vue}"], // add your preferred file extensions here
+        theme: {
+          extend: {
+            colors: {
+              primary: "#9D22C2",
+              "primary-purple": "#7A1AD6",
+              "light-purple": "#F2E4FC",
+              "grayscale-10": "#fdfdfd",
+              "grayscale-20": "#ECF1F6",
+              "grayscale-30": "#E3E9ED",
+              "grayscale-40": "#D1D8DD",
+              "grayscale-50": "#BFC6CC",
+              "grayscale-60": "#9CA4AB",
+              "grayscale-70": "#78828A",
+              "grayscale-80": "#66707A",
+              "grayscale-90": "#434E58",
+              "grayscale-100": "#070717",
+            },
+          },
+        },
+        plugins: [],
+      }
+    </script>
+  </head>
+
+  <body class="bg-primary-purple">
+    <!-- Mobile Sidebar -->
+    <navbar class="flex py-4 px-5 bg-primary-purple md:hidden justify-between">
+      <button onclick="handleSidebarMobile()">
+        <img src="./img/icons/hamburger.svg" class="w-6 h-6" alt="hamburger" />
+      </button>
+      <img src="./img/logo/logo-champaign-white-2.png" alt="logo-champaign" class="w-[48px]" />
+    </navbar>
+
+    <sidebar
+      id="sidebar-mobile"
+      class="w-full hidden fixed left-0 top-0 h-full px-[24px] py-[40px] bg-primary-purple z-10"
+    >
+      <div class="h-full flex flex-col">
+        <div class="flex justify-between items-center relative">
+          <button id="toggle-sidebar" onclick="handleSidebarMobile()">
+            <img src="./img/icons/exclamation-2.svg" class="w-8 h-8" />
+          </button>
+          <img src="./img/logo/logo-champaign-white-2.png" alt="logo-champaign" class="w-[48px]" />
+        </div>
+        <hr class="my-6 opacity-50" />
+        <div>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 menu-active rounded-xl"
+            href="./dashboard-v2.html"
+          >
+            <img src="./img/icons/home-purple.svg" />
+            <p class="paragraph-semibold-caption sidebar-menu">Home</p>
+          </a>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 hover:bg-purple-600 animate-ease rounded-xl"
+            href="/ai-reports"
+          >
+            <img src="./img/icons/rocket-white.svg" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">Ai Reports</p>
+          </a>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 hover:bg-purple-600 animate-ease rounded-xl"
+            href="./campaign.html"
+          >
+            <img src="./img/icons/data.svg" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">Campaign</p>
+          </a>
+        </div>
+        <div class="mt-auto">
+          <a class="p-4 flex items-center cursor-pointer gap-4 rounded-xl" href="/my-account">
+            <img src="./img/dummy-user.png" class="w-6 h-6" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">My Account</p>
+          </a>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 hover:bg-purple-600 animate-ease rounded-xl"
+            href="#"
+          >
+            <img src="./img/icons/settings-white.svg" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">Log Out</p>
+          </a>
+        </div>
+      </div>
+    </sidebar>
+
+    <!-- Desktop Sidebar -->
+    <sidebar
+      id="sidebar-desktop"
+      class="hidden md:block fixed left-0 top-0 h-full px-[24px] py-[40px] collapsed-sidebar"
+    >
+      <div class="h-full flex flex-col">
+        <div class="flex justify-between items-center relative">
+          <img src="./img/logo/logo-champaign.svg" alt="logo-champaign" onclick="handleSidebar()" />
+          <button id="toggle-sidebar" onclick="handleSidebar()" class="hidden">
+            <img src="./img/icons/hamburger.svg" class="w-8 h-8" alt="hamburger" />
+          </button>
+        </div>
+        <hr class="my-6 opacity-50" />
+        <div>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 menu-active rounded-xl"
+            href="./dashboard-v2.html"
+          >
+            <img src="./img/icons/home-purple.svg" />
+            <p class="paragraph-semibold-caption sidebar-menu">Home</p>
+          </a>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 hover:bg-purple-600 animate-ease rounded-xl"
+            href="/ai-reports"
+          >
+            <img src="./img/icons/rocket-white.svg" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">Ai Reports</p>
+          </a>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 hover:bg-purple-600 animate-ease rounded-xl"
+            href="./campaign.html"
+          >
+            <img src="./img/icons/data.svg" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">Campaign</p>
+          </a>
+        </div>
+        <div class="mt-auto">
+          <a class="p-4 flex items-center cursor-pointer gap-4 rounded-xl" href="/my-account">
+            <img src="./img/dummy-user.png" class="w-6 h-6" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">My Account</p>
+          </a>
+          <a
+            class="p-4 flex items-center cursor-pointer gap-4 hover:bg-purple-600 animate-ease rounded-xl"
+            href="#"
+          >
+            <img src="./img/icons/settings-white.svg" />
+            <p class="paragraph-semibold-caption text-white sidebar-menu">Log Out</p>
+          </a>
+        </div>
+      </div>
+    </sidebar>
+
+    <main class="expanded-content p-6 h-full">
+      <section
+        class="bg-white w-full md:rounded-[22px] h-full p-4 md:py-6 md:px-10 flex flex-col overflow-scroll"
+        id="bg-rhino"
+      >
+        <!-- Title -->
+        <div class="flex justify-between items-center mb-8">
+          <a class="paragraph-reguler-caption text-grayscale-80">
+            <strong class="text-primary-purple"> Settings</strong>
+          </a>
+          <img
+            src="./img/logo/logo-champaign.png"
+            alt="logo-champaign"
+            class="hidden md:block w-[120px]"
+          />
+        </div>
+
+        <!-- Menu settings mobile -->
+        <div class="relative mb-4">
+          <select
+            class="w-full md:hidden bg-primary-purple text-white py-4 px-3 font-bold rounded-lg"
+            name="menu"
+            id="menu"
+          >
+            <option>Reset Password</option>
+            <option>Account Settings</option>
+            <option>User Profile</option>
+            <option>Two Factor Authentication</option>
+            <option selected>View Members</option>
+            <option>Upcoming Bill</option>
+            <option>Card Details</option>
+            <option>Subcriptions Details</option>
+            <option>Receipts</option>
+          </select>
+          <img src="./img/icons/chevron-down.svg" class="absolute top-[16px] right-[12px]" />
+        </div>
+
+        <div class="rounded-xl p-4 bg-white/50 backdrop-blur flex flex-col gap-4">
+          <div class="grid grid-cols-12 gap-6">
+            <!-- Sidebar Menu Settings -->
+            <div class="hidden col-span-2 md:flex flex-col gap-4">
+              <!-- Menu Profile -->
+              <div>
+                <p class="heading-semibold-7 mb-4">Profile</p>
+                <div class="flex flex-col gap-2">
+                  <a
+                    href="./settings-profile.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 text-[#5C5C5C] hover:bg-gray-50 rounded-xl"
+                  >
+                    <img src="./img/icons/user.svg" class="w-[24px]" />
+                    <p class="paragraph-reguler-caption">User Profile</p>
+                  </a>
+                  <a
+                    href="./settings-reset-password.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 rounded-xl text-[#5C5C5C] hover:bg-gray-50"
+                  >
+                    <img src="./img/icons/lock.svg" class="w-[24px]" />
+                    <p class="paragraph-reguler-caption">Reset Password</p>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Menu Account Settings -->
+              <div>
+                <p class="heading-semibold-7 mb-4">Account Settings</p>
+                <div class="flex flex-col gap-2">
+                  <a
+                    href="./settings-2fa.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 rounded-xl text-[#5C5C5C] hover:bg-gray-50"
+                  >
+                    <img src="./img/icons/lock.svg" class="w-[24px]" />
+                    <p class="paragraph-reguler-caption whitespace-nowrap">
+                      Two Factor Authentication
+                    </p>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Menu Team Member -->
+              <div>
+                <p class="heading-semibold-7 mb-4">Team Member</p>
+                <div class="flex flex-col gap-2">
+                  <a
+                    href="./settings-team-members.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 rounded-xl text-white bg-primary-purple"
+                  >
+                    <img src="./img/icons/user-white.svg" class="w-[24px]" />
+                    <p class="paragraph-semibold-caption">View Members</p>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Menu Billing -->
+              <div>
+                <p class="heading-semibold-7 mb-4">Billing</p>
+                <div class="flex flex-col gap-2">
+                  <a
+                    href="./settings-upcoming-billing.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 rounded-xl text-[#5C5C5C] hover:bg-gray-50"
+                  >
+                    <img src="./img/icons/bill.svg" class="w-[24px]" />
+                    <p class="paragraph-reguler-caption">Upcoming Bill</p>
+                  </a>
+                  <a
+                    href="./settings-card-details.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 rounded-xl text-[#5C5C5C] hover:bg-gray-50"
+                  >
+                    <img src="./img/icons/card.svg" class="w-[24px]" />
+                    <p class="paragraph-reguler-caption">Card Details</p>
+                  </a>
+                  <a
+                    href="./settings-subscription-details.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 rounded-xl text-[#5C5C5C] hover:bg-gray-50"
+                  >
+                    <img src="./img/icons/money.svg" class="w-[24px]" />
+                    <p class="paragraph-reguler-caption">Subcriptions Details</p>
+                  </a>
+                  <a
+                    href="./settings-receipts.html"
+                    class="w-full flex items-center gap-2 py-3 px-4 rounded-xl text-[#5C5C5C] hover:bg-gray-50"
+                  >
+                    <img src="./img/icons/receipt.svg" class="w-[24px]" />
+                    <p class="paragraph-reguler-caption">Receipts</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Settings -->
+            <div class="col-span-12 md:col-span-10 md:pl-4">
+              <div class="md:p-6 flex flex-col gap-6">
+                <p class="heading-bold-7">Team Members</p>
+                <div class="grid grid-cols-12">
+                  <div class="col-span-12 md:col-span-8">
+                    <p class="paragraph-reguler-body text-grayscale-80">
+                      When two factor authentication is enabled, you will be prompted for a secure,
+                      random token during authentication. You may retrieve this token from your
+                      phone's Google Authenticator application.
+                    </p>
+                  </div>
+                  <div class="col-span-12 md:col-span-4">
+                    <div class="flex justify-end">
+                      <button
+                        class="w-full mt-4 md:mt-0 lg:mt-4 xl:mt-0 md:w-max bg-primary-purple rounded-xl text-white text-center py-3 px-6 paragraph-medium-caption"
+                        onclick="handleOpenModal('modal-1')"
+                      >
+                        + Invite Team Member
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div
+                    class="bg-[#F9F2FE]/50 rounded-xl p-4 border border-[#9D22C2]/50 flex flex-col justify-center items-center gap-3"
+                  >
+                    <img
+                      src="./img/logo-toyota.png"
+                      class="w-[80px] h-[80px] rounded-full"
+                      alt=""
+                    />
+                    <p class="heading-bold-7">Ronit Shahi</p>
+                    <p class="text-grayscale-90 paragraph-reguler-label">Owner / Agency Admin</p>
+                    <p class="text-grayscale-90 paragraph-reguler-caption">ronytshahi@gmail.com</p>
+
+                    <div class="w-full">
+                      <button
+                        class="w-full bg-primary-purple rounded-xl text-white text-center py-2 px-4 paragraph-medium-caption mb-2"
+                      >
+                        Active
+                      </button>
+                      <button
+                        class="w-full border border-[#FF4747] text-[#FF4747] rounded-xl text-center py-2 px-4 paragraph-medium-caption"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-[#F9F2FE]/50 rounded-xl p-4 border border-[#9D22C2]/50 flex flex-col justify-center items-center gap-3"
+                  >
+                    <img
+                      src="./img/logo-toyota.png"
+                      class="w-[80px] h-[80px] rounded-full"
+                      alt=""
+                    />
+                    <p class="heading-bold-7">Ronit Shahi</p>
+                    <p class="text-grayscale-90 paragraph-reguler-label">Owner / Agency Admin</p>
+                    <p class="text-grayscale-90 paragraph-reguler-caption">ronytshahi@gmail.com</p>
+
+                    <div class="w-full">
+                      <button
+                        class="w-full bg-primary-purple rounded-xl text-white text-center py-2 px-4 paragraph-medium-caption mb-2"
+                      >
+                        Active
+                      </button>
+                      <button
+                        class="w-full border border-[#FF4747] text-[#FF4747] rounded-xl text-center py-2 px-4 paragraph-medium-caption"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    class="bg-[#F9F2FE]/50 rounded-xl p-4 border border-[#9D22C2]/50 flex flex-col justify-center items-center gap-3"
+                  >
+                    <img
+                      src="./img/logo-toyota.png"
+                      class="w-[80px] h-[80px] rounded-full"
+                      alt=""
+                    />
+                    <p class="heading-bold-7">Ronit Shahi</p>
+                    <p class="text-grayscale-90 paragraph-reguler-label">Owner / Agency Admin</p>
+                    <p class="text-grayscale-90 paragraph-reguler-caption">ronytshahi@gmail.com</p>
+
+                    <div class="w-full">
+                      <button
+                        class="w-full bg-primary-purple rounded-xl text-white text-center py-2 px-4 paragraph-medium-caption mb-2"
+                      >
+                        Active
+                      </button>
+                      <button
+                        class="w-full border border-[#FF4747] text-[#FF4747] rounded-xl text-center py-2 px-4 paragraph-medium-caption"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex justify-end items-center flex-wrap gap-3">
+                  <button
+                    class="w-full md:w-max border-primary-purple border text-primary-purple rounded-xl text-center py-3 px-6 paragraph-medium-caption"
+                  >
+                    Disable
+                  </button>
+                  <button
+                    class="w-full md:w-max bg-primary-purple rounded-xl text-white text-center py-3 px-6 paragraph-medium-caption"
+                  >
+                    Update
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal-wrapper p-4 hide" id="modal-1">
+      <div class="modal-content relative">
+        <div class="absolute top-6 right-6">
+          <button onclick="handleCloseModal('modal-1')">
+            <img src="./img/icons/exclamation-black.svg" class="w-6" />
+          </button>
+        </div>
+        <p class="font-bold mb-6 text-[20px]">Invite Team Member</p>
+
+        <input type="email" placeholder="Enter your mail" class="input-small w-full mb-4 text-sm" />
+
+        <div class="flex justify-end items-center flex-wrap gap-3 mt-6">
+          <button
+            class="w-full md:w-max border-primary-purple border text-primary-purple rounded-xl text-center py-3 px-6 paragraph-medium-caption"
+          >
+            Cancel
+          </button>
+          <button
+            class="w-full md:w-max bg-primary-purple rounded-xl text-white text-center py-3 px-6 paragraph-medium-caption"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      const handleSidebarMobile = () => {
+        const element = document.getElementById("sidebar-mobile")
+        element.classList.toggle("hidden")
+      }
+
+      const handleSidebar = () => {
+        const sidebar = document.getElementById("sidebar-desktop")
+        const content = document.getElementsByTagName("main")[0]
+        const hasExpanded = sidebar.classList.contains("expanded-sidebar")
+        const hasCollapsed = sidebar.classList.contains("collapsed-sidebar")
+
+        const buttonHamburger = document.getElementById("toggle-sidebar")
+
+        if (hasExpanded) {
+          sidebar.classList.remove("expanded-sidebar")
+          sidebar.classList.add("collapsed-sidebar")
+
+          sidebar.classList.remove("justify-between")
+          sidebar.classList.add("justify-center")
+
+          content.classList.remove("collapsed-content")
+          content.classList.add("expanded-content")
+
+          buttonHamburger.classList.remove("block")
+          buttonHamburger.classList.add("hidden")
+        }
+        if (hasCollapsed) {
+          sidebar.classList.remove("collapsed-sidebar")
+          sidebar.classList.add("expanded-sidebar")
+
+          sidebar.classList.remove("justify-center")
+          sidebar.classList.add("justify-between")
+
+          content.classList.remove("expanded-content")
+          content.classList.add("collapsed-content")
+
+          buttonHamburger.classList.remove("hidden")
+          buttonHamburger.classList.add("block")
+        }
+      }
+      const handleViewPassword = id => {
+        const element = document.getElementById(id)
+        if (element.type === "password") {
+          element.type = "text"
+          return
+        }
+        if (element.type === "text") {
+          element.type = "password"
+          return
+        }
+      }
+
+      /* Modal */
+      const modal_1 = document.getElementById("modal-1")
+
+      const handleClickOverlay = (e, id) => {
+        if (e.target === e.currentTarget) {
+          handleCloseModal(id)
+        }
+      }
+      modal_1.addEventListener("click", e => handleClickOverlay(e, "modal-1"))
+
+      const handleOpenModal = id => {
+        const element = document.getElementById(id)
+        element.classList.remove("hide")
+        element.classList.add("show")
+      }
+
+      const handleCloseModal = id => {
+        const element = document.getElementById(id)
+        element.classList.remove("show")
+        element.classList.add("hide")
+      }
+    </script>
+  </body>
+</html>
